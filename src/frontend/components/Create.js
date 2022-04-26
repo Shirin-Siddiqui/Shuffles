@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { ethers } from "ethers"
 import { Row, Form, Button } from 'react-bootstrap'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
+import './home.css';
+
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 const Create = ({ marketplace, nft }) => {
@@ -60,7 +62,7 @@ const Create = ({ marketplace, nft }) => {
               <Form.Control onChange={(e) => setDescription(e.target.value)} size="lg" required as="textarea" placeholder="Description" />
               <Form.Control onChange={(e) => setPrice(e.target.value)} size="lg" required type="number" placeholder="Price in ETH" />
               <div className="d-grid px-0">
-                <Button onClick={createNFT} variant="primary" size="lg">
+                <Button className = "button-styles"onClick={createNFT} variant="primary" size="lg">
                   Create & List NFT!
                 </Button>
               </div>

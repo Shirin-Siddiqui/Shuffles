@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 import { Row, Col, Card } from 'react-bootstrap'
+import './home.css';
 
 export default function MyPurchases({ marketplace, nft, account }) {
   const [loading, setLoading] = useState(true)
@@ -59,7 +60,7 @@ export default function MyPurchases({ marketplace, nft, account }) {
         </div>
         : (
           <main style={{ padding: "1rem 0" }}>
-            <h2>No purchases</h2>
+            <h2 className='featured-text'>No purchases</h2>
           </main>
         )}
     </div>

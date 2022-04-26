@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 import { Row, Col, Card, Button } from 'react-bootstrap'
+import './home.css';
+import LandingPage from "./LandingPage"
 
 const Home = ({ marketplace, nft }) => {
   const [loading, setLoading] = useState(true)
@@ -48,6 +50,11 @@ const Home = ({ marketplace, nft }) => {
     </main>
   )
   return (
+    <div>
+    <LandingPage />
+    <div className='featured-text'>
+      Buy Featured Drops
+    </div>
     <div className="flex justify-center">
       {items.length > 0 ?
         <div className="px-5 container">
@@ -64,7 +71,7 @@ const Home = ({ marketplace, nft }) => {
                   </Card.Body>
                   <Card.Footer>
                     <div className='d-grid'>
-                      <Button onClick={() => buyMarketItem(item)} variant="primary" size="lg">
+                      <Button className = "button-styles" onClick={() => buyMarketItem(item)} variant="primary" size="lg">
                         Buy for {ethers.utils.formatEther(item.totalPrice)} ETH
                       </Button>
                     </div>
@@ -79,6 +86,7 @@ const Home = ({ marketplace, nft }) => {
             <h2>No listed assets</h2>
           </main>
         )}
+    </div>
     </div>
   );
 }
