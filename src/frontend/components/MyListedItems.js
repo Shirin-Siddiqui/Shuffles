@@ -10,7 +10,7 @@ function renderSoldItems(items) {
         {items.map((item, idx) => (
           <Col key={idx} className="overflow-hidden">
             <Card>
-              <Card.Img variant="top" src={item.image} />
+              <Card.Img variant="top" src={"https://ipfs.infura.io/ipfs/" + item.image} />
               <Card.Footer>
                 For {ethers.utils.formatEther(item.totalPrice)} ETH - Recieved {ethers.utils.formatEther(item.price)} ETH
               </Card.Footer>
@@ -48,7 +48,7 @@ export default function MyListedItems({ marketplace, nft, account }) {
           itemId: i.itemId,
           name: metadata.name,
           description: metadata.description,
-          image: metadata.image
+          image: decodeURI(metadata.image.trim())
         }
         listedItems.push(item)
         // Add listed item to sold items array if sold
@@ -76,7 +76,7 @@ export default function MyListedItems({ marketplace, nft, account }) {
             {listedItems.map((item, idx) => (
               <Col key={idx} className="overflow-hidden">
                 <Card>
-                  <Card.Img variant="top" src={item.image} />
+                  <Card.Img variant="top" src={"https://ipfs.infura.io/ipfs/" + item.image} />
                   <Card.Footer>{ethers.utils.formatEther(item.totalPrice)} ETH</Card.Footer>
                 </Card>
               </Col>

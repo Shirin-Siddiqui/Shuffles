@@ -35,6 +35,7 @@ const Create = ({ marketplace, nft }) => {
     }
   }
   const mintThenList = async (result) => {
+    console.log(result.path)
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`
     // mint nft 
     await(await nft.mint(uri)).wait()
