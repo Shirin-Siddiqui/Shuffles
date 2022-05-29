@@ -24,13 +24,26 @@ const Home = ({ marketplace, nft }) => {
         // get total price of item (item price + fee)
         const totalPrice = await marketplace.getTotalPrice(item.itemId)
         // Add item to items array
-        console.log(decodeURI(metadata.image.trim()))
+        console.log(metadata)
         items.push({
           totalPrice,
           itemId: item.itemId,
           seller: item.seller,
           name: metadata.name,
           description: metadata.description,
+          ownership:metadata.ownershipp,
+          tires:metadata.tiress,
+          totalTokens:1000,
+
+          tokenBasic:metadata.tokenBasic,          
+          tokenStandard: metadata.tokenStandard,
+          tokenPremium: metadata.tokenPremium,
+          standardPrice: metadata.standardPrice,
+          premiumPrice: metadata.premiumPrice,
+          tokenInfluencersFraction: metadata.tokenInfluencersFraction,
+          tokenStandardFraction: (metadata.ownershipp / 3) / metadata.tokenStandard,
+          tokenBasicFraction: (metadata.ownershipp / 3) / metadata.tokenBasic,
+          tokenPremiumFraction: (metadata.ownershipp / 3) / metadata.tokenPremium,
           image: decodeURI(metadata.image.trim())
         })
       }
@@ -65,19 +78,51 @@ const Home = ({ marketplace, nft }) => {
             {items.map((item, idx) => (
               <Col key={idx} className="overflow-hidden">
                 <Card>
-                
-
                   <Card.Img variant="top" src={"https://ipfs.infura.io/ipfs/" + item.image} />
                   <Card.Body color="secondary">
                     <Card.Title>{item.name}</Card.Title>
-                    <Card.Text>
+                    <Card.Text class="item-desc">
                       {item.description}
                     </Card.Text>
+                    <Card.Text>
+                      {"Ownership Offered: " + item.ownership}
+                    </Card.Text>
+                    <Card.Text>
+                      {"Total Tokens: " + 1000}
+                    </Card.Text>
+                    <Card.Text>
+                      {"Basic Tokens: " + item.tokenBasic}
+                    </Card.Text>
+                    <Card.Text>
+                    {"Basic Fraction: " + item.tokenBasicFraction.toFixed(2)}
+                    </Card.Text>
+                    <Card.Text>
+                      {"Standard Tokens: " + item.tokenStandard}
+                    </Card.Text>
+                    <Card.Text>
+                    {"Standard Fraction: " + item.tokenStandardFraction.toFixed(2)}
+                    </Card.Text>
+                    <Card.Text>
+                      {"Premium Tokens: " + item.tokenPremium}
+                    </Card.Text>
+                    <Card.Text>
+                    {"Premium Fraction: " + item.tokenPremiumFraction.toFixed(2)}
+                    </Card.Text>
+                    <Card.Text>
+                    {"Tokens offered to influencers: " + item.tokenInfluencersFraction}
+                    </Card.Text>
+                    
                   </Card.Body>
                   <Card.Footer>
                     <div className='d-grid'>
                       <Button className = "button-styles" onClick={() => buyMarketItem(item)} variant="primary" size="lg">
-                        Buy for {ethers.utils.formatEther(item.totalPrice)} ETH
+                        Buy Basic for {ethers.utils.formatEther(item.totalPrice)} ETH
+                      </Button>
+                      <Button className = "button-styles" onClick={() => buyMarketItem(item)} variant="primary" size="lg">
+                        Buy Standard for {item.standardPrice} ETH
+                      </Button>
+                      <Button className = "button-styles" onClick={() => buyMarketItem(item)} variant="primary" size="lg">
+                        Buy Premium for {item.premiumPrice} ETH
                       </Button>
                     </div>
                   </Card.Footer>
